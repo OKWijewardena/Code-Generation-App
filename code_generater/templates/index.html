@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI for generate code with user styles</title>
+    <style>
+        /* Add some stylish CSS for the conversation */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #8a63ff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .conversation {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .user-message {
+            color: #2196F3;
+        }
+
+        .assistant-message {
+            color: #8a63ff;
+        }
+
+        /* Style the forms and buttons */
+        form {
+            margin: 10px 0;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="color"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #8a63ff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #8a63ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI for generate code with user styles</h1>
+    <div class="container">
+
+        <!-- Style Task Form -->
+        <form method="post" action="/">
+            <label for="message_table">Style Task: </label>
+            <input type="text" id="message_table" name="message" required>
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if task_description %}
+        <p>{{ task_description }}</p>
+        {% endif %}
+
+        <!-- Conversation Display -->
+{% if conversation %}
+{% for message in conversation %}
+    <div class="conversation">
+        {% if message['role'] == "user" %}
+            <h2 class="user-message">You:</h2>
+            <p>{{ message['content'] }}</p>
+        {% elif message['role'] == "assistant" %}
+            <h2 class="assistant-message">AI:</h2>
+            <pre>{{ message['content'] }}</pre> <!-- Use <pre> for preformatted text -->
+        {% endif %}
+    </div>
+{% endfor %}
+{% endif %}
+
+        
+    </div>
+</body>
+</html>
